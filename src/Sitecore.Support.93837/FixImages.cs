@@ -164,7 +164,7 @@ namespace Sitecore.Support
                     {
 
                         string input = current.Attributes["style"].Value; ;
-                        string pattern = "(width:+.+?;)|(height:+.+?;)";
+                        string pattern = @"(\swidth:+.+?;)|(height:+.+?;)|^(width:+.+?;)";
                         string replacement = "";
                         Regex rgx = new Regex(pattern);
                         string result = rgx.Replace(input, replacement);
