@@ -17,11 +17,18 @@ namespace Sitecore.Support
     {
         private static int ExtractCSS(string styleValue, string s)
         {
-            int num = styleValue.IndexOf(s, StringComparison.OrdinalIgnoreCase);
-            int num2 = styleValue.IndexOf(";", num);
             int result;
-            int.TryParse(styleValue.Substring(num + s.Length, num2 - num - s.Length).Replace("px", "").Trim(), out result);
-            return result;
+            if (styleValue.Contains(s))
+            {
+                int num = styleValue.IndexOf(s, StringComparison.OrdinalIgnoreCase);
+                int num2 = styleValue.IndexOf(";", num);
+                int.TryParse(styleValue.Substring(num + s.Length, num2 - num - s.Length).Replace("px", "").Trim(), out result);
+                return result;
+            }
+            else
+            {
+                return result = 0;
+            }
         }
 
         private static Item FindItem(ID itemID)
