@@ -46,6 +46,7 @@ namespace Sitecore.Support
                   }
               }
           }
+
           result = null;
           return result;
         }
@@ -79,6 +80,7 @@ namespace Sitecore.Support
                     num = num2 + 2;
                     FixImages.FindNext(html, out num3, ref num2);
                 }
+
                 stringBuilder.Append(html.Substring(num2 + 2));
                 result = FixImages.RemoveStyleAttribute(stringBuilder.ToString());
             }
@@ -86,6 +88,7 @@ namespace Sitecore.Support
             {
                 result = html;
             }
+
             return result;
         }
         
@@ -108,6 +111,7 @@ namespace Sitecore.Support
                 {
                     linkText = text.Remove(num);
                 }
+
                 DynamicLink dynamicLink;
                 bool flag3 = !DynamicLink.TryParse(linkText, out dynamicLink);
                 if (flag3)
@@ -115,12 +119,14 @@ namespace Sitecore.Support
                     result = img;
                     return result;
                 }
+
                 MediaItem mediaItem = Context.ContentDatabase.GetItem(dynamicLink.ItemId);
                 bool flag4 = mediaItem == null;
                 if (flag4)
                 {
                     mediaItem = FixImages.FindItem(dynamicLink.ItemId);
                 }
+
                 int num2 = 0;
                 int num3 = 0;
                 bool flag5 = xmlAttribute != null;
@@ -130,12 +136,14 @@ namespace Sitecore.Support
                     num2 = FixImages.ExtractCSS(value, "width:");
                     num3 = FixImages.ExtractCSS(value, "height:");
                 }
+
                 bool flag6 = num2 <= 0 || num3 <= 0;
                 if (flag6)
                 {
                     result = img;
                     return result;
                 }
+
                 bool flag7 = xmlAttribute2 == null;
                 if (flag7)
                 {
@@ -179,6 +187,7 @@ namespace Sitecore.Support
                     }
                 }
             }
+
             return htmlDocument.DocumentNode.InnerHtml;
         }
         
@@ -189,6 +198,7 @@ namespace Sitecore.Support
                 "?",
                 "|amp;"
             };
+
             string[] array = url.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             List<string> list = new List<string>();
             for (int i = 0; i < array.Length; i++)
@@ -199,6 +209,7 @@ namespace Sitecore.Support
                     array[i] = null;
                 }
             }
+
             string[] array2 = array;
             for (int j = 0; j < array2.Length; j++)
             {
@@ -209,6 +220,7 @@ namespace Sitecore.Support
                     list.Add(text);
                 }
             }
+
             string text2 = list[0];
             for (int k = 1; k < list.Count; k++)
             {
@@ -222,6 +234,7 @@ namespace Sitecore.Support
                     text2 = text2 + "|amp;" + list[k];
                 }
             }
+
             return text2;
         }
     }
